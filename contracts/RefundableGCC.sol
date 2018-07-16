@@ -8,7 +8,6 @@ contract RefundableGCC is RefundableCrowdsale, MintedCrowdsale {
     address public owner_;
     uint phase1deadline;
     uint phase2deadline;
-    uint goal;
 
     constructor
         (
@@ -25,7 +24,6 @@ contract RefundableGCC is RefundableCrowdsale, MintedCrowdsale {
         RefundableCrowdsale(_goal)
         {
          owner_ = msg.sender;
-         goal = _goal;
          //phase1deadline = _closingTime + 1 minutes;     //currently not used (I'll activate it when i have enough time)
          //phase2deadline = phase1deadline + 1 minutes;   //currently not used (I'll activate it when i have enough time)
         }
