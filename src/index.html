@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>TutorialToken - Wallet</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+          <h1 class="text-center">Event Crowd</h1>
+          <hr/>
+          <br/>
+        </div>
+      </div>
+
+      <div id="idTT" class="row">
+        <div class="col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
+          <div class="panel panel-default">
+
+
+            <div class="panel-heading">
+              <h3 class="panel-title">TutorialToken</h3>
+            </div>
+
+
+            <div class="panel-body">
+
+              <h4>Balance</h4>
+
+              <strong>Balance</strong>: <span id="TTBalance"></span> TT
+              <br/><br/>
+
+              <h4>Transfer</h4>
+              <input type="text" class="form-control" id="TTTransferAddress" placeholder="Address" />
+              <input type="text" class="form-control" id="TTTransferAmount" placeholder="Amount" />
+              <br/><br/>
+
+              <button class="btn btn-primary" id="transferButton" type="button">Transfer</button>
+
+            </div>
+
+          </div>
+          <br/><br/>
+        </div>
+      </div>
+
+
+
+      <div id="idContractStatus" class="row">
+        <div class="col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
+          <div class="panel panel-default">
+
+
+            <div class="panel-heading">
+              <h2 class="panel-title">Contract Status</h2>
+            </div>
+
+
+            <div class="panel-body">
+
+              <h4>Contract and owner addresses</h4>
+
+              <strong>Token address     </strong>: <span id="idTokenAddress"></span>
+              <br/>
+              <strong>Crowdsale address </strong>: <span id="idCrowdsaleAddress"></span>
+              <br/>
+              <strong>Token Owner       </strong>: <span id="idTokenOwner"></span>
+              <br/>
+              <strong>Crowdsale Owner   </strong>: <span id="idCrowdsaleOwner"></span>
+              <br/>
+              <br/>
+
+              <h4>Timelines</h4>
+
+              <strong>Time to start contract</strong>:   <span id="contractStart"></span> seconds
+              <br/>
+              <strong>Time to close contract</strong>:   <span id="contractClose"></span> seconds
+              <br/>
+              <strong>Time to phase-1 deadline</strong>: <span id="phase1deadline"></span> seconds
+              <br/>
+              <strong>Time to phase-2 deadline</strong>: <span id="phase2deadline"></span> seconds
+              <br/>
+              <br/>
+
+              <h4>Funds raised</h4>
+
+              <strong>Total reserved tickets:</strong> <span id="idConractBalanceTic">(later)</span> tickets
+              <br/>
+              <strong>Raised amount in ether:</strong> <span id="idConractBalanceEth">(no balance)</span> ether
+              <br/>
+              <br/>
+
+              Press this button to change the ownership of the Token contract from the "Owner" (which is you!) to Crowdsale contract
+              <br/>
+              <br/>
+              <button class="" id="idChangeOwnership" type="button">Change ownership</button>
+
+            </div>
+
+          </div>
+          <br/><br/>
+        </div>
+      </div>
+
+
+      <div id="idUserPanel" class="row">
+        <div class="col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
+          <div class="panel panel-default">
+
+
+            <div class="panel-heading">
+              <h3 class="panel-title">User Panel</h3>
+            </div>
+
+            <div class="panel-body">
+
+              <strong>Would you like to reserve tickets?</strong>:
+              <br/>
+              <input type="text" class="" id="buyingAmount" placeholder="Amount" />
+              <button class="" id="reserveButton" type="button">Reserve</button>
+              <br/>
+              <br/>
+              <strong>Ticket balance:</strong> <span id="idTicketBalance"> (zero balance)</span> tickets
+              <br/>
+              <br/>
+              <strong>Your Meta-mask balance:</strong> <span id="idEthBalance"> (zero balance)</span> ether
+              <br/>
+              <br/>
+              <br/><br/><br/><br/>
+              would you like to refund?
+              <button class="" id="refundButton" type="button">Refund</button>
+              <br/><br/>
+              <strong>Voting</strong>:
+              <button class="" id="voteToStop" type="button">Dissatisfied</button>
+              <button class="" id="voteToStop" type="button">Satisfied</button>
+              <br/><br/>
+
+            </div>
+
+          </div>
+          <br/><br/>
+        </div>
+      </div>
+
+
+      <div id="OwnerPanel" class="row">
+        <div class="col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
+          <div class="panel panel-default">
+
+
+            <div class="panel-heading">
+              <h3 class="panel-title">Owner's Panel</h3>
+            </div>
+
+            <div class="panel-body">
+
+              <strong>Finalize</strong>
+              <br/>
+              <button class="" id="idFinalize" type="button">Finalize</button>
+              <br/>
+              <br/>
+
+            </div>
+
+          </div>
+          <br/><br/>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
