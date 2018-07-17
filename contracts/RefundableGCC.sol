@@ -45,4 +45,9 @@ contract RefundableGCC is RefundableCrowdsale, MintedCrowdsale {
     function timeToPhase2Deadline() public view returns (uint){
       return phase2deadline - now;
     }
+
+    function getEscrowAddress() public view returns (address){
+      return escrow;
+    }
+
 }
