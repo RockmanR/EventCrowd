@@ -68,21 +68,26 @@
 
 
             <div class="panel-heading">
-              <h2 class="panel-title">Contract Status</h2>
+              <h2 class="panel-title">Contracts Panel</h2>
             </div>
 
 
             <div class="panel-body">
 
-              <h4>Contract and owner addresses</h4>
+              <h4>Addresses</h4>
+              To list the addresses of all deployed contracts and their owners for transpaerncy and integrity.
+              <br/>
+              <br/>
 
-              <strong>Token address     </strong>: <span id="idTokenAddress"></span>
+              <strong>Token contract     </strong>: <span id="idTokenAddress"></span>
               <br/>
-              <strong>Crowdsale address </strong>: <span id="idCrowdsaleAddress"></span>
+              <strong>Owned by           </strong>: <span id="idTokenOwner"></span> (should be owned by "Crowdsale contract")
               <br/>
-              <strong>Token Owner       </strong>: <span id="idTokenOwner"></span>
               <br/>
-              <strong>Crowdsale Owner   </strong>: <span id="idCrowdsaleOwner"></span>
+              <strong>Crowdsale contract </strong>: <span id="idCrowdsaleAddress"></span>
+              <br/>
+              <strong>Owned by           </strong>: <span id="idCrowdsaleOwner"></span> (should be your MetaMask address)
+              <br/>
               <br/>
               <br/>
 
@@ -92,9 +97,6 @@
               <br/>
               <strong>Time to close contract</strong>:   <span id="contractClose"></span> seconds
               <br/>
-              <strong>Time to phase-1 deadline</strong>: <span id="phase1deadline"></span> seconds
-              <br/>
-              <strong>Time to phase-2 deadline</strong>: <span id="phase2deadline"></span> seconds
               <br/>
               <br/>
 
@@ -104,12 +106,17 @@
               <br/>
               <strong>Raised amount in ether:</strong> <span id="idConractBalanceEth">(no balance)</span> ether
               <br/>
+              <strong>Goal reached?</strong> <span id="idGoalReached">(no status)</span>
+              <br/>
+              <br/>
               <br/>
 
-              Press this button to change the ownership of the Token contract from the "Owner" (which is you!) to Crowdsale contract
+              Press this button to change the ownership of the Token contract from the "Crowdsale Owner" (which is you!) to "Crowdsale contract".
               <br/>
               <br/>
               <button class="" id="idChangeOwnership" type="button">Change ownership</button>
+              <br/>
+              <br/>
 
             </div>
 
@@ -144,7 +151,7 @@
               <br/>
               <br/><br/><br/><br/>
               would you like to refund?
-              <button class="" id="refundButton" type="button">Refund</button>
+              <button class="" id="idClaimRefund" type="button">Claim refund</button>
               <br/><br/>
               <strong>Voting</strong>:
               <button class="" id="voteToStop" type="button">Dissatisfied</button>
@@ -170,9 +177,9 @@
 
             <div class="panel-body">
 
-              <strong>Finalize</strong>
+              <strong>Do you want to finalize the contract? </strong> <button class="" id="idFinalize" type="button">Finalize</button>
               <br/>
-              <button class="" id="idFinalize" type="button">Finalize</button>
+              <strong>Finalize status: </strong> <span id="idIsFinalized">(no status)</span>
               <br/>
               <br/>
 
@@ -183,7 +190,10 @@
         </div>
       </div>
 
-
+      <button class="" id="idRefresh" type="button">Refresh</button>
+      <br/>
+      <br/>
+      <br/>
 
     </div>
 
