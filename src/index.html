@@ -29,38 +29,6 @@
         </div>
       </div>
 
-      <div id="idTT" class="row">
-        <div class="col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
-          <div class="panel panel-default">
-
-
-            <div class="panel-heading">
-              <h3 class="panel-title">TutorialToken</h3>
-            </div>
-
-
-            <div class="panel-body">
-
-              <h4>Balance</h4>
-
-              <strong>Balance</strong>: <span id="TTBalance"></span> TT
-              <br/><br/>
-
-              <h4>Transfer</h4>
-              <input type="text" class="form-control" id="TTTransferAddress" placeholder="Address" />
-              <input type="text" class="form-control" id="TTTransferAmount" placeholder="Amount" />
-              <br/><br/>
-
-              <button class="btn btn-primary" id="transferButton" type="button">Transfer</button>
-
-            </div>
-
-          </div>
-          <br/><br/>
-        </div>
-      </div>
-
-
 
       <div id="idContractStatus" class="row">
         <div class="col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
@@ -68,7 +36,7 @@
 
 
             <div class="panel-heading">
-              <h2 class="panel-title">Contracts Panel</h2>
+              <h2 class="panel-title">Contracts status</h2>
             </div>
 
 
@@ -81,12 +49,12 @@
 
               <strong>Token contract     </strong>: <span id="idTokenAddress"></span>
               <br/>
-              <strong>Owned by           </strong>: <span id="idTokenOwner"></span> (should be owned by "Crowdsale contract")
+              <strong>Owned by           </strong>: <span id="idTokenOwner"></span> <FONT COLOR="FA5858">(should be owned by "Crowdsale contract")</font>
               <br/>
               <br/>
               <strong>Crowdsale contract </strong>: <span id="idCrowdsaleAddress"></span>
               <br/>
-              <strong>Owned by           </strong>: <span id="idCrowdsaleOwner"></span> (should be your MetaMask address)
+              <strong>Owned by           </strong>: <span id="idCrowdsaleOwner"></span> <FONT COLOR="2E64FE">(should be your MetaMask address)</font>
               <br/>
               <br/>
               <br/>
@@ -96,8 +64,8 @@
               <strong>Time to start contract</strong>:   <span id="contractStart"></span> seconds
               <br/>
               <strong>Time to close contract</strong>:   <span id="contractClose"></span> seconds
-              <br/>
-              <br/>
+              <br/><FONT COLOR="2E64FE"> if the seconds are at '11579208' or too high that means its reached below zero</font>
+              <br/><FONT COLOR="A4A4A4">this is due to uint variable, it can be solved by an if statement. currently I'll keep it to show an example of how 'underflow' bugs happen</font>
               <br/>
 
               <h4>Funds raised</h4>
@@ -111,10 +79,10 @@
               <br/>
               <br/>
 
-              Press this button to change the ownership of the Token contract from the "Crowdsale Owner" (which is you!) to "Crowdsale contract".
+              <strong>You need to press this button</strong> to change the ownership of the Token contract from the "Crowdsale Owner" (which is you!) to "Crowdsale contract".
               <br/>
               <br/>
-              <button class="" id="idChangeOwnership" type="button">Change ownership</button>
+              <button class="" id="idtransferOwnership" type="button">Change ownership</button>
               <br/>
               <br/>
 
@@ -149,8 +117,7 @@
               <strong>Your Meta-mask balance:</strong> <span id="idEthBalance"> (zero balance)</span> ether
               <br/>
               <br/>
-              <br/><br/><br/><br/>
-              would you like to refund?
+              <strong>would you like to refund?</strong>
               <button class="" id="idClaimRefund" type="button">Claim refund</button>
               <br/><br/>
               <strong>Voting</strong>:
