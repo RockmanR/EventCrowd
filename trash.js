@@ -1,5 +1,47 @@
 
+// Testing
 
+pragma solidity ^0.4.24;
+
+import "truffle/Assert.sol";
+import "truffle/DeployedAddresses.sol";
+import "../contracts/RefundableGCC.sol";
+import "../contracts/GustavoCoin.sol";
+
+contract TestRefundableGCC {
+  function testInitialBalanceUsingDeployedContract() {
+    GustavoCoin GC = GustavoCoin(DeployedAddresses.GustavoCoin());
+
+    uint expected = 0;
+
+    Assert.equal(GC.totalSupply(), 0, "Owner should have 0 coin initially");
+  }
+/*
+  function testInitialBalanceUsingDeployedContract2() {
+    GustavoCoin GC = GustavoCoin(DeployedAddresses.GustavoCoin());
+    RefundableGCC refundableGCC = RefundableGCC(DeployedAddresses.RefundableGCC());
+
+    //GC.transferOwnership(DeployedAddresses.RefundableGCC());
+
+    Assert.equal(GC.totalSupply(), 0, "Owner should have 0 coin initially");
+  }**/
+
+  //function testTokenOwnershipByCrowdsale() {
+    //GustavoCoin GC = GustavoCoin(DeployedAddresses.GustavoCoin());
+    //RefundableGCC refundableGCC = RefundableGCC(DeployedAddresses.RefundableGCC());
+
+    //GC.transferOwnership(refundableGCC);
+
+  //  Assert.equal(5, 5);
+//  }
+
+}
+
+
+
+
+
+//////////
 
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
                     RefundableGCCInstance = instance;

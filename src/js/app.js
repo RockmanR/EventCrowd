@@ -49,7 +49,7 @@ App = {
 
   bindEvents: function() {
     $(document).on('click', '#reserveButton', App.reserveTickets);
-    $(document).on('click', '#idChangeOwnership', App.changeOwnership);
+    $(document).on('click', '#idtransferOwnership', App.transferOwnership);
     $(document).on('click', '#idFinalize', App.finalize);
     $(document).on('click', '#idClaimRefund', App.claimRefund);
     $(document).on('click', '#idRefresh', App.refreshPage);
@@ -76,7 +76,7 @@ App = {
 
   reserveTickets: function() {
     event.preventDefault();
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
     var amount = parseInt($('#buyingAmount').val());
     console.log('Attempting to reserve ' + amount + ' tickets.');
 
@@ -84,36 +84,35 @@ App = {
       if (error) {
         console.log(error);
       }
-                  var account = accounts[0];
+                  //var account = accounts[0];
                   App.contracts.RefundableGCC.deployed().then(function(instance) {
-                  RefundableGCCInstance = instance;
-                    //return RefundableGCCInstance.buyTokens(account, {from: account, value: web3.toWei(1, 'ether'), gas: 21000, web3.toWei(20,'Gwei')}); //for reference only (can be deleted later)
-                    return RefundableGCCInstance.buyTokens(account, {from: account, value: web3.toWei(amount/100, 'ether')}); //to continue
+                  refundableGCCInstance = instance;
+                    return refundableGCCInstance.sendTransaction( {from: accounts[0], value: web3.toWei(amount/100, 'ether')});
                   }).then(function(result) {
                      alert('Transfer Successful!');
-                     return App.getBalances();
+                     return App.refreshPage();
                   }).catch(function(err) {
                      console.log(err.message);
                   });
     });
   },
 
-  changeOwnership: function() {
+  transferOwnership: function() {
     event.preventDefault();
     console.log('Attempting to change ownership of the Token..');
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                RefundableGCCInstance = instance;
+                refundableGCCInstance = instance;
                                     App.contracts.GustavoCoin.deployed().then(function(instance) {
                                       gustavoCoinInstance = instance;
-                                      return gustavoCoinInstance.transferOwnership(RefundableGCCInstance.address);
+                                      return gustavoCoinInstance.transferOwnership(refundableGCCInstance.address);
                                     }).then(function(result) {
-                                       //do something if you want
+                                       alert('Ownership have transferred');
                                     }).catch(function(err) {
                                        console.log(err.message);
                                     });
                 }).then(function(result) {
-                   alert('Ownership have transferred');
+                   //alert('Ownership have transferred');
                 }).catch(function(err) {
                    console.log(err.message);
                 });
@@ -123,10 +122,10 @@ App = {
   finalize: function() {
     event.preventDefault();
     console.log('Attempting to finalize contract by owner..');
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                RefundableGCCInstance = instance;
-                return RefundableGCCInstance.finalize();
+                refundableGCCInstance = instance;
+                return refundableGCCInstance.finalize();
                 }).then(function(result) {
                    console.log('finalization clicked');
                 }).catch(function(err) {
@@ -138,10 +137,10 @@ App = {
   claimRefund: function() {
     event.preventDefault();
     console.log('Attempting to finalize contract by owner..');
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                RefundableGCCInstance = instance;
-                return RefundableGCCInstance.claimRefund();
+                refundableGCCInstance = instance;
+                return refundableGCCInstance.claimRefund();
                 }).then(function(result) {
                    console.log('claim refund clicked');
                 }).catch(function(err) {
@@ -154,11 +153,11 @@ App = {
 ///  state variable & waller readers (they are not transactions)
 
   getState: function() {
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
     console.log('Attempting to get contract state...');
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                  RefundableGCCInstance = instance;
-                  return RefundableGCCInstance.getStateFrom();
+                  refundableGCCInstance = instance;
+                  return refundableGCCInstance.getStateFrom();
                 }).then(function(result) {
                    console.log('contract state is: '+result);
                    //$('#contractStart').text(result);
@@ -170,14 +169,14 @@ App = {
 
 
   getOpeningTime: function() {
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
     console.log('Attempting to get start time...');
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                  RefundableGCCInstance = instance;
-                  return RefundableGCCInstance.timeToStartContract();
+                  refundableGCCInstance = instance;
+                  return refundableGCCInstance.timeToStartContract();
                 }).then(function(result) {
                   time = result.c[0];
-                  
+
                   console.log('the opening time is: '+time);
                   $('#contractStart').text(time);
                 }).catch(function(err) {
@@ -188,11 +187,11 @@ App = {
 
 
   getClosingTime: function() {
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
     console.log('get closing time...');
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                  RefundableGCCInstance = instance;
-                  return RefundableGCCInstance.timeToCloseContract();
+                  refundableGCCInstance = instance;
+                  return refundableGCCInstance.timeToCloseContract();
                 }).then(function(result) {
                   time = result.c[0];
                   $('#contractClose').text(time);
@@ -216,10 +215,10 @@ App = {
 /*
   getEscrowAddress: function() {
     console.log('Attempting to get escrow address...');
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                  RefundableGCCInstance = instance;
-                  return RefundableGCCInstance.getEscrowAddress();
+                  refundableGCCInstance = instance;
+                  return refundableGCCInstance.getEscrowAddress();
                 }).then(function(result) {
                         console.log('the escrow address is'+result);
                         $('#idEscrowAddress').text(result);
@@ -233,10 +232,10 @@ App = {
 
   getCrowdsaleAddress: function() {
     console.log('Attempting to get crowdsale address...');
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                  RefundableGCCInstance = instance;
-                  $('#idCrowdsaleAddress').text(RefundableGCCInstance.address);
+                  refundableGCCInstance = instance;
+                  $('#idCrowdsaleAddress').text(refundableGCCInstance.address);
                 });
     //return App.getTokenOwner();
   },
@@ -260,10 +259,10 @@ App = {
 
   getCrowdsaleOwner: function() {
     console.log('Attempting to get crowdsale owner...');
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                  RefundableGCCInstance = instance;
-                  return RefundableGCCInstance.owner_.call();
+                  refundableGCCInstance = instance;
+                  return refundableGCCInstance.owner_.call();
                 }).then(function(result) {
                   console.log(result);
                   $('#idCrowdsaleOwner').text(result);
@@ -276,10 +275,10 @@ App = {
 /*
   getEscrowOwner: function() {
     console.log('Attempting to get escrow owner...');
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                        RefundableGCCInstance = instance;
-                        return RefundableGCCInstance.getEscrowAddress();
+                        refundableGCCInstance = instance;
+                        return refundableGCCInstance.getEscrowAddress();
                 }).then(function(result) {
                         $('#idEscrowOwner').text(result);
                         console.log('Escrow owner is ' + result);
@@ -291,11 +290,11 @@ App = {
 **/
 /*
   getPhase1deadline: function() {
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
     console.log('Attempting to get phase 1 deadline...');
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                  RefundableGCCInstance = instance;
-                  return RefundableGCCInstance.timeToPhase1Deadline();
+                  refundableGCCInstance = instance;
+                  return refundableGCCInstance.timeToPhase1Deadline();
                 }).then(function(result) {
                         time = result.c[0];
                         $('#phase1deadline').text(time);
@@ -307,11 +306,11 @@ App = {
 
 
   getPhase2deadline: function() {
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
     console.log('Attempting to get phase 2 deadline...');
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                  RefundableGCCInstance = instance;
-                  return RefundableGCCInstance.timeToPhase2Deadline();
+                  refundableGCCInstance = instance;
+                  return refundableGCCInstance.timeToPhase2Deadline();
                 }).then(function(result) {
                         time = result.c[0];
                         $('#phase2deadline').text(time);
@@ -323,11 +322,11 @@ App = {
 
 **/
   getEscrowBalance: function() {
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
     console.log('Attempting to get Escrow balance...');
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                        RefundableGCCInstance = instance;
-                        return RefundableGCCInstance.getEscrowAddress();
+                        refundableGCCInstance = instance;
+                        return refundableGCCInstance.getEscrowAddress();
                 }).then(function(resultAdr) {
                   web3.eth.getBalance(resultAdr, function(error, result){
                       if(!error) {
@@ -344,11 +343,11 @@ App = {
 
 
   getGoalReached: function() {
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
     console.log('Attempting to get goal reached status...');
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                        RefundableGCCInstance = instance;
-                        return RefundableGCCInstance.goalReached();
+                        refundableGCCInstance = instance;
+                        return refundableGCCInstance.goalReached();
                 }).then(function(result) {
                   $('#idGoalReached').text(result);
                   console.log('Goal reached is ' + result);
@@ -360,11 +359,11 @@ App = {
 
 
   getContractState: function() { //to get the status of the Crowdsale status (Active, Closed, or Refunding)
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
     console.log('Attempting to get contract status...');
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                        RefundableGCCInstance = instance;
-                        return RefundableGCCInstance.state.call();
+                        refundableGCCInstance = instance;
+                        return refundableGCCInstance.state.call();
                 }).then(function(result) {
                   $('#idGoalReached').text(result);
                   console.log('contract status is ' + result);
@@ -400,7 +399,7 @@ App = {
 
 
   getEthBalance: function() {
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
     var account;
     var ethBalance;
     console.log('Attempting to get Eth balance...');
@@ -426,11 +425,11 @@ App = {
 
   getIsFinalized: function() {
     console.log('Attempting to get finalized status...');
-    var RefundableGCCInstance;
+    var refundableGCCInstance;
     var status;
                 App.contracts.RefundableGCC.deployed().then(function(instance) {
-                        RefundableGCCInstance = instance;
-                        return RefundableGCCInstance.isFinalized.call();
+                        refundableGCCInstance = instance;
+                        return refundableGCCInstance.isFinalized.call();
                 }).then(function(result) {
                   console.log('finalized status is '+result);
                   $('#idIsFinalized').text(result);
