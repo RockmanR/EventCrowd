@@ -36,48 +36,66 @@
 
 
             <div class="panel-heading">
-              <h2 class="panel-title">Contracts status</h2>
+              <h2 class="panel-title">Contracts Dashboard</h2>
             </div>
 
 
             <div class="panel-body">
+
+
+              <h4>Contract Status</h4>
+
+              <strong>Contract Started?</strong> <span id="idContractStarted">(no status)</span>
+              <br/>
+              <strong>Contract Closed?</strong> <span id="idContractClosed">(no status)</span>
+              <br/>
+              <strong>Contract Finalized?</strong> <span id="idIsFinalized">(no status)</span>
+              <br/>
+              <br/>
+
+
+              <h4>Contract Timeline</h4>
+
+              <strong>Time to start contract</strong>:   <span id="idContractStart">(no status)</span>
+              <br/>
+              <strong>Time to close contract</strong>:   <span id="idContractClose">(no status)</span>
+              <br/>
+              <br/>
+
+
+              <h4>Funds raised</h4>
+
+              <strong>Total bought tickets:</strong> <span id="idConractBalanceTic">(no status)</span>
+              <br/>
+              <strong>Contract balance in ether:</strong> <span id="idConractBalanceEth">(no status)</span>
+              <br/>
+              <strong>Funding Goal:</strong> <span id="idFundingGoal">(no status)</span>
+              <br/>
+              <strong>Goal reached?</strong> <span id="idGoalReached">(no status)</span>
+              <br/>
+              <br/>
+
+
 
               <h4>Addresses</h4>
               To list the addresses of all deployed contracts and their owners for transpaerncy and integrity.
               <br/>
               <br/>
 
-              <strong>Token contract     </strong>: <span id="idTokenAddress"></span>
+              <strong>Token contract     </strong>: <span id="idTokenAddress">(no data)</span>
               <br/>
-              <strong>Owned by           </strong>: <span id="idTokenOwner"></span> <FONT COLOR="FA5858">(should be owned by "Crowdsale contract")</font>
+              <strong>Owned by           </strong>: <span id="idTokenOwner">(no data)</span> <FONT COLOR="FA5858">(should be owned by "Crowdsale contract")</font>
               <br/>
               <br/>
-              <strong>Crowdsale contract </strong>: <span id="idCrowdsaleAddress"></span>
+              <strong>Crowdsale contract </strong>: <span id="idCrowdsaleAddress">(no data)</span>
               <br/>
-              <strong>Owned by           </strong>: <span id="idCrowdsaleOwner"></span> <FONT COLOR="2E64FE">(should be your MetaMask address)</font>
+              <strong>Owned by           </strong>: <span id="idCrowdsaleOwner">(no data)</span> <FONT COLOR="2E64FE">(should be your MetaMask address)</font>
               <br/>
               <br/>
               <br/>
 
-              <h4>Timelines</h4>
 
-              <strong>Time to start contract</strong>:   <span id="contractStart"></span> seconds
-              <br/>
-              <strong>Time to close contract</strong>:   <span id="contractClose"></span> seconds
-              <br/><FONT COLOR="2E64FE"> if the seconds are at '11579208' or too high that means its reached below zero</font>
-              <br/><FONT COLOR="A4A4A4">this is due to uint variable, it can be solved by an if statement. currently I'll keep it to show an example of how 'underflow' bugs happen</font>
-              <br/>
 
-              <h4>Funds raised</h4>
-
-              <strong>Total reserved tickets:</strong> <span id="idConractBalanceTic">(later)</span> tickets
-              <br/>
-              <strong>Raised amount in ether:</strong> <span id="idConractBalanceEth">(no balance)</span> ether
-              <br/>
-              <strong>Goal reached?</strong> <span id="idGoalReached">(no status)</span>
-              <br/>
-              <br/>
-              <br/>
 
               <strong>You need to press this button</strong> to change the ownership of the Token contract from the "Crowdsale Owner" (which is you!) to "Crowdsale contract".
               <br/>
@@ -105,25 +123,22 @@
 
             <div class="panel-body">
 
-              <strong>Would you like to reserve tickets?</strong>:
+              <strong>Would you like to buy tickets?</strong>:
               <br/>
-              <input type="text" class="" id="buyingAmount" placeholder="Amount" />
-              <button class="" id="reserveButton" type="button">Reserve</button>
-              <br/>
-              <br/>
-              <strong>Ticket balance:</strong> <span id="idTicketBalance"> (zero balance)</span> tickets
+              <input type="text" class="" id="buyingAmount" placeholder="# of tickets" />
+              <button class="" id="reserveButton" type="button">Buy</button>
               <br/>
               <br/>
-              <strong>Your Meta-mask balance:</strong> <span id="idEthBalance"> (zero balance)</span> ether
+              <strong>Ticket balance:</strong> <span id="idTicketBalance">(no data)</span>
+              <br/>
+              <br/>
+              <strong>Your Meta-mask balance:</strong> <span id="idEthBalance">(no data)</span>
               <br/>
               <br/>
               <strong>would you like to refund?</strong>
               <button class="" id="idClaimRefund" type="button">Claim refund</button>
               <br/><br/>
-              <strong>Voting</strong>:
-              <button class="" id="voteToStop" type="button">Dissatisfied</button>
-              <button class="" id="voteToStop" type="button">Satisfied</button>
-              <br/><br/>
+
 
             </div>
 
@@ -131,6 +146,7 @@
           <br/><br/>
         </div>
       </div>
+
 
 
       <div id="OwnerPanel" class="row">
@@ -146,9 +162,6 @@
 
               <strong>Do you want to finalize the contract? </strong> <button class="" id="idFinalize" type="button">Finalize</button>
               <br/>
-              <strong>Finalize status: </strong> <span id="idIsFinalized">(no status)</span>
-              <br/>
-              <br/>
 
             </div>
 
@@ -156,6 +169,44 @@
           <br/><br/>
         </div>
       </div>
+
+
+
+      <div id="Testing Panel" class="row">
+        <div class="col-sm-6 col-sm-push-3 col-md-4 col-md-push-4">
+          <div class="panel panel-default">
+
+
+            <div class="panel-heading">
+              <h3 class="panel-title">*Testing*</h3>
+            </div>
+
+            <div class="panel-body">
+              This panel is ONLY FOR TESTING purposes. it uses a separate contract to modify "opening" and "closing" time of contract at your will, to ease the testing process.
+              <br/>
+              <br/>
+
+              <strong>Set the number of seconds from now: </strong>
+              <br/>
+              to start contract:
+              <input type="text" class="" id="idSetStartTxt" placeholder="# of seconds" />
+              <br/>
+              to close contract:
+              <input type="text" class="" id="idSetCloseTxt" placeholder="# of seconds" />
+              <br/>
+              <button class="" id="idSetTime" type="button">Set</button>
+              <br/>
+              <br/>
+
+
+            </div>
+
+          </div>
+          <br/><br/>
+        </div>
+      </div>
+
+
 
       <button class="" id="idRefresh" type="button">Refresh</button>
       <br/>

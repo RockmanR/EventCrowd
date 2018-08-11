@@ -286,7 +286,7 @@
         "id": 22,
         "nodeType": "ImportDirective",
         "scope": 115,
-        "sourceUnit": 717,
+        "sourceUnit": 726,
         "src": "53:80:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -297,7 +297,7 @@
         "id": 23,
         "nodeType": "ImportDirective",
         "scope": 115,
-        "sourceUnit": 804,
+        "sourceUnit": 813,
         "src": "134:81:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -311,10 +311,10 @@
               "id": 24,
               "name": "TimedCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 803,
+              "referencedDeclaration": 812,
               "src": "251:14:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TimedCrowdsale_$803",
+                "typeIdentifier": "t_contract$_TimedCrowdsale_$812",
                 "typeString": "contract TimedCrowdsale"
               }
             },
@@ -329,10 +329,10 @@
               "id": 26,
               "name": "MintedCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 716,
+              "referencedDeclaration": 725,
               "src": "267:15:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_MintedCrowdsale_$716",
+                "typeIdentifier": "t_contract$_MintedCrowdsale_$725",
                 "typeString": "contract MintedCrowdsale"
               }
             },
@@ -342,9 +342,9 @@
           }
         ],
         "contractDependencies": [
-          529,
-          716,
-          803
+          538,
+          725,
+          812
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -352,9 +352,9 @@
         "id": 114,
         "linearizedBaseContracts": [
           114,
-          716,
-          803,
-          529
+          725,
+          812,
+          538
         ],
         "name": "GustavoCoinCrowdsale",
         "nodeType": "ContractDefinition",
@@ -474,7 +474,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1860,
+                        "referencedDeclaration": 1869,
                         "src": "702:3:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -716,7 +716,7 @@
                     "referencedDeclaration": 43,
                     "src": "622:6:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_MintableToken_$1536",
+                      "typeIdentifier": "t_contract$_MintableToken_$1545",
                       "typeString": "contract MintableToken"
                     }
                   }
@@ -728,10 +728,10 @@
                   "name": "Crowdsale",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 529,
+                  "referencedDeclaration": 538,
                   "src": "596:9:1",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_Crowdsale_$529_$",
+                    "typeIdentifier": "t_type$_t_contract$_Crowdsale_$538_$",
                     "typeString": "type(contract Crowdsale)"
                   }
                 },
@@ -774,10 +774,10 @@
                   "name": "TimedCrowdsale",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 803,
+                  "referencedDeclaration": 812,
                   "src": "638:14:1",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_TimedCrowdsale_$803_$",
+                    "typeIdentifier": "t_type$_t_contract$_TimedCrowdsale_$812_$",
                     "typeString": "type(contract TimedCrowdsale)"
                   }
                 },
@@ -905,7 +905,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_MintableToken_$1536",
+                    "typeIdentifier": "t_contract$_MintableToken_$1545",
                     "typeString": "contract MintableToken"
                   },
                   "typeName": {
@@ -913,10 +913,10 @@
                     "id": 42,
                     "name": "MintableToken",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 1536,
+                    "referencedDeclaration": 1545,
                     "src": "542:13:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_MintableToken_$1536",
+                      "typeIdentifier": "t_contract$_MintableToken_$1545",
                       "typeString": "contract MintableToken"
                     }
                   },
@@ -963,7 +963,7 @@
                       "name": "openingTime",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 727,
+                      "referencedDeclaration": 736,
                       "src": "1031:11:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -978,7 +978,7 @@
                       "name": "now",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1871,
                       "src": "1045:3:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1076,7 +1076,7 @@
                       "name": "closingTime",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 729,
+                      "referencedDeclaration": 738,
                       "src": "1223:11:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1091,7 +1091,7 @@
                       "name": "now",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1871,
                       "src": "1237:3:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1204,7 +1204,7 @@
                       "name": "now",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1871,
                       "src": "1440:3:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1317,7 +1317,7 @@
                       "name": "now",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1871,
                       "src": "1643:3:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1435,7 +1435,7 @@
         "id": 22,
         "nodeType": "ImportDirective",
         "scope": 115,
-        "sourceUnit": 717,
+        "sourceUnit": 726,
         "src": "53:80:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1446,7 +1446,7 @@
         "id": 23,
         "nodeType": "ImportDirective",
         "scope": 115,
-        "sourceUnit": 804,
+        "sourceUnit": 813,
         "src": "134:81:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -1460,10 +1460,10 @@
               "id": 24,
               "name": "TimedCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 803,
+              "referencedDeclaration": 812,
               "src": "251:14:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_TimedCrowdsale_$803",
+                "typeIdentifier": "t_contract$_TimedCrowdsale_$812",
                 "typeString": "contract TimedCrowdsale"
               }
             },
@@ -1478,10 +1478,10 @@
               "id": 26,
               "name": "MintedCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 716,
+              "referencedDeclaration": 725,
               "src": "267:15:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_MintedCrowdsale_$716",
+                "typeIdentifier": "t_contract$_MintedCrowdsale_$725",
                 "typeString": "contract MintedCrowdsale"
               }
             },
@@ -1491,9 +1491,9 @@
           }
         ],
         "contractDependencies": [
-          529,
-          716,
-          803
+          538,
+          725,
+          812
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -1501,9 +1501,9 @@
         "id": 114,
         "linearizedBaseContracts": [
           114,
-          716,
-          803,
-          529
+          725,
+          812,
+          538
         ],
         "name": "GustavoCoinCrowdsale",
         "nodeType": "ContractDefinition",
@@ -1623,7 +1623,7 @@
                         "name": "msg",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 1860,
+                        "referencedDeclaration": 1869,
                         "src": "702:3:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
@@ -1865,7 +1865,7 @@
                     "referencedDeclaration": 43,
                     "src": "622:6:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_MintableToken_$1536",
+                      "typeIdentifier": "t_contract$_MintableToken_$1545",
                       "typeString": "contract MintableToken"
                     }
                   }
@@ -1877,10 +1877,10 @@
                   "name": "Crowdsale",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 529,
+                  "referencedDeclaration": 538,
                   "src": "596:9:1",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_Crowdsale_$529_$",
+                    "typeIdentifier": "t_type$_t_contract$_Crowdsale_$538_$",
                     "typeString": "type(contract Crowdsale)"
                   }
                 },
@@ -1923,10 +1923,10 @@
                   "name": "TimedCrowdsale",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 803,
+                  "referencedDeclaration": 812,
                   "src": "638:14:1",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_type$_t_contract$_TimedCrowdsale_$803_$",
+                    "typeIdentifier": "t_type$_t_contract$_TimedCrowdsale_$812_$",
                     "typeString": "type(contract TimedCrowdsale)"
                   }
                 },
@@ -2054,7 +2054,7 @@
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_MintableToken_$1536",
+                    "typeIdentifier": "t_contract$_MintableToken_$1545",
                     "typeString": "contract MintableToken"
                   },
                   "typeName": {
@@ -2062,10 +2062,10 @@
                     "id": 42,
                     "name": "MintableToken",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 1536,
+                    "referencedDeclaration": 1545,
                     "src": "542:13:1",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_MintableToken_$1536",
+                      "typeIdentifier": "t_contract$_MintableToken_$1545",
                       "typeString": "contract MintableToken"
                     }
                   },
@@ -2112,7 +2112,7 @@
                       "name": "openingTime",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 727,
+                      "referencedDeclaration": 736,
                       "src": "1031:11:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -2127,7 +2127,7 @@
                       "name": "now",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1871,
                       "src": "1045:3:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -2225,7 +2225,7 @@
                       "name": "closingTime",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 729,
+                      "referencedDeclaration": 738,
                       "src": "1223:11:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -2240,7 +2240,7 @@
                       "name": "now",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1871,
                       "src": "1237:3:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -2353,7 +2353,7 @@
                       "name": "now",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1871,
                       "src": "1440:3:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -2466,7 +2466,7 @@
                       "name": "now",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1862,
+                      "referencedDeclaration": 1871,
                       "src": "1643:3:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -2553,5 +2553,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-07-30T13:46:16.668Z"
+  "updatedAt": "2018-08-01T17:21:39.190Z"
 }

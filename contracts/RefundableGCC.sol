@@ -6,17 +6,17 @@ import 'openzeppelin-solidity/contracts/crowdsale/distribution/RefundableCrowdsa
 
 contract RefundableGCC is RefundableCrowdsale, MintedCrowdsale {
     address public owner_;
+    uint256 _openingTime = now + 2 minutes;
+    uint256 _closingTime = _openingTime + 3 minutes;
+    uint256 _rate = 1000;
+    address _wallet = 0x88d25dE3ceACa489aeb673cFf4AA744e838a8aAC;
+    uint256 _goal = 1 ether;
     uint phase1deadline;
     uint phase2deadline;
 
     constructor
         (
-          uint256 _openingTime,
-          uint256 _closingTime,
-          uint256 _rate,
-          address _wallet,
-          MintableToken _token,
-          uint256 _goal
+          MintableToken _token
         )
         public
         Crowdsale(_rate, _wallet, _token)
@@ -35,7 +35,7 @@ contract RefundableGCC is RefundableCrowdsale, MintedCrowdsale {
     }
 //this function to get the time to close the funding. it will be accessed by web3 instance
     function timeToCloseContract() public view returns (uint){
-      return closingTime - now;
+      return _closingTime - now;
     }
 //this function to get the time to close the phase 1 period. it will be accessed by web3 instance
     function timeToPhase1Deadline() public view returns (uint){
@@ -45,7 +45,6 @@ contract RefundableGCC is RefundableCrowdsale, MintedCrowdsale {
     function timeToPhase2Deadline() public view returns (uint){
       return phase2deadline - now;
     }
-
     function getEscrowAddress() public view returns (address){
       return escrow;
     }

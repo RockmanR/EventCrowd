@@ -1,40 +1,37 @@
-//var TutorialToken = artifacts.require("TutorialToken");
-const RefundableGCC = artifacts.require('./RefundableGCC.sol');
-const GustavoCoin = artifacts.require('./GustavoCoin.sol');
+const MyCrowdsale         = artifacts.require('./MyCrowdsale.sol');
+const MyCrowdsale_Ganache = artifacts.require('./MyCrowdsale_Ganache.sol');
+const OZT_00              = artifacts.require('./OZT_00.sol');
 
+/**
+* @dev Use the below (1st) deployment when you are using Ganache. This is a work around since i'm facing an issue trying to set the time through the contract. so the below code contains "getBlock" to set the openingTime & closingTime using web3 through Java Script.
+* I don't have this issue when deploying to Geth or Infura, so use the 2nd deployment for them.
+*/
+
+////////////////////////                             ///////////////////////////
+//////////////////////// 1st Deployment: for Ganache ///////////////////////////
+////////////////////////                             ///////////////////////////
+/*
 module.exports = function(deployer, network, accounts) {
-    const openingTime = web3.eth.getBlock('latest').timestamp + 60*5; // five secs in the future
-    const closingTime = openingTime + 60*5; // time in the future (sec * min)
-    const rate = new web3.BigNumber(1000);
-    const wallet = "0x88d25dE3ceACa489aeb673cFf4AA744e838a8aAC"; //accounts[0];
-    const goal = 500000000000000000; // 5 ether
+    var openingTime = web3.eth.getBlock('latest').timestamp + 15; // adding 60 seconds to the current ethereum time
+    var closingTime = openingTime + 60*5; // adding (5 minutews) to openingTime
 
     return deployer
-        .then(() => { return deployer.deploy(GustavoCoin); })
-        .then(() => { return deployer.deploy(RefundableGCC,openingTime,closingTime,rate,wallet,GustavoCoin.address,goal); });
-      //  .then(() => { return deployer.deploy(TutorialToken); });
+        .then(() => { return deployer.deploy(OZT_00); })
+        .then(() => { return deployer.deploy(MyCrowdsale_Ganache,OZT_00.address,openingTime,closingTime); });
 };
-
-/*
-module.exports = async function(deployer, network, accounts) {
-  return await sambool(deployer, accounts);
-};
-
-async function sambool(deployer, accounts) {
-
-  //const openingTime = web3.eth.getBlock('latest').timestamp + 60*2; // five secs in the future
-
-  const openingTime = web3.eth.getBlockNumber((err, res) => {
-    return res;
-  });
-  const closingTime = openingTime + 60*15; // time in the future (sec * min)
-  const rate = new web3.BigNumber(1000);
-  const wallet = accounts[0];
-  const goal = 5000000000000000000; // 5 ether
-
-  return deployer
-      .then(() => { return deployer.deploy(GustavoCoin); })
-      .then(() => { return deployer.deploy(RefundableGCC,openingTime,closingTime,rate,wallet,GustavoCoin.address,goal); })
-      .then(() => { return deployer.deploy(TutorialToken); });
-}
 **/
+
+
+/**
+* @dev Use the below (2nd) deployment when you are using Geth or Infura.
+*/
+
+////////////////////////                                   ///////////////////////////
+//////////////////////// 2nd Deployment: for Geth & Infura ///////////////////////////
+////////////////////////                                   ///////////////////////////
+
+module.exports = function(deployer, network, accounts) {
+    return deployer
+        .then(() => { return deployer.deploy(OZT_00); })
+        .then(() => { return deployer.deploy(MyCrowdsale,OZT_00.address); });
+};
