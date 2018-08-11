@@ -1,5 +1,6 @@
-pragma solidity 0.4.24;
 
+pragma solidity 0.4.24;
+/*
 import './GustavoCoin.sol';
 import 'openzeppelin-solidity/contracts/crowdsale/emission/MintedCrowdsale.sol';
 import 'openzeppelin-solidity/contracts/crowdsale/validation/TimedCrowdsale.sol';
@@ -43,3 +44,4 @@ contract GustavoCoinCrowdsale is TimedCrowdsale, MintedCrowdsale {
       return phase2deadline - now;
     }
 }
+**/
