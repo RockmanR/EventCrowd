@@ -307,7 +307,7 @@
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity ^0.4.23;\n\nimport './OZT_00.sol';\nimport 'openzeppelin-solidity/contracts/crowdsale/distribution/RefundableCrowdsale.sol';\n\ncontract BurnableCrowdsale is RefundableCrowdsale {\n\n    OZT_00 token;\n\n    constructor\n        (\n            OZT_00 _token\n        )\n        public\n        {\n         token = _token;\n        }\n\n    function claimRefund() public {\n        super.claimRefund();\n        token.burnByCrowdsale(token.balanceOf(msg.sender), msg.sender);\n    }\n}\n",
+  "source": "pragma solidity ^0.4.23;\n\nimport './MyToken_01.sol';\nimport 'openzeppelin-solidity/contracts/crowdsale/distribution/RefundableCrowdsale.sol';\n\n\n/**\n * @title Burnable Crowdsale Contract\n *\n * @dev Implementation of a Burnable Crowdsale\n * this contract is meant to be implemented on top of a Refundable Crowdsale\n * in order to burn Tokens when the user send the tokens back to the contract\n *\n * The Tokens will be burned when the user execute \"claimRenund\" funtion (located in Refundable Crowdsale contract).\n *\n * This contract for some reason is not available in OpenZeppelin library.\n * so I've made one and will be happy to replace it when they have one.\n */\ncontract BurnableCrowdsale is RefundableCrowdsale {\n\n  /**\n   * @dev This contract needs to get the address of the token in order to access/utilize\n   * it's functions\n   */\n    MyToken_01 token;\n\n    constructor\n        (\n            MyToken_01 _token\n        )\n        public\n        {\n         token = _token;\n        }\n\n    /**\n     * @dev This function will execute the claimRefund in\n     * it's functions\n     */\n    function claimRefund() public {\n        super.claimRefund();\n        token.burnByCrowdsale(token.balanceOf(msg.sender), msg.sender);\n    }\n}\n",
   "sourcePath": "/Users/ahmedalmutawa/ethereum/EventCrowd/contracts/BurnableCrowdsale.sol",
   "ast": {
     "absolutePath": "/Users/ahmedalmutawa/ethereum/EventCrowd/contracts/BurnableCrowdsale.sol",
@@ -331,13 +331,13 @@
         "src": "0:24:0"
       },
       {
-        "absolutePath": "/Users/ahmedalmutawa/ethereum/EventCrowd/contracts/OZT_00.sol",
-        "file": "./OZT_00.sol",
+        "absolutePath": "/Users/ahmedalmutawa/ethereum/EventCrowd/contracts/MyToken_01.sol",
+        "file": "./MyToken_01.sol",
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 40,
-        "sourceUnit": 503,
-        "src": "26:22:0",
+        "sourceUnit": 346,
+        "src": "26:26:0",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -347,8 +347,8 @@
         "id": 3,
         "nodeType": "ImportDirective",
         "scope": 40,
-        "sourceUnit": 895,
-        "src": "49:88:0",
+        "sourceUnit": 736,
+        "src": "53:88:0",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -361,36 +361,36 @@
               "id": 4,
               "name": "RefundableCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 894,
-              "src": "169:19:0",
+              "referencedDeclaration": 735,
+              "src": "695:19:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_RefundableCrowdsale_$894",
+                "typeIdentifier": "t_contract$_RefundableCrowdsale_$735",
                 "typeString": "contract RefundableCrowdsale"
               }
             },
             "id": 5,
             "nodeType": "InheritanceSpecifier",
-            "src": "169:19:0"
+            "src": "695:19:0"
           }
         ],
         "contractDependencies": [
-          732,
-          780,
-          894,
-          1006,
-          1186
+          573,
+          621,
+          735,
+          847,
+          1027
         ],
         "contractKind": "contract",
-        "documentation": null,
+        "documentation": "@title Burnable Crowdsale Contract\n * @dev Implementation of a Burnable Crowdsale\nthis contract is meant to be implemented on top of a Refundable Crowdsale\nin order to burn Tokens when the user send the tokens back to the contract\n * The Tokens will be burned when the user execute \"claimRenund\" funtion (located in Refundable Crowdsale contract).\n * This contract for some reason is not available in OpenZeppelin library.\nso I've made one and will be happy to replace it when they have one.",
         "fullyImplemented": false,
         "id": 39,
         "linearizedBaseContracts": [
           39,
-          894,
-          780,
-          1186,
-          1006,
-          732
+          735,
+          621,
+          1027,
+          847,
+          573
         ],
         "name": "BurnableCrowdsale",
         "nodeType": "ContractDefinition",
@@ -401,23 +401,23 @@
             "name": "token",
             "nodeType": "VariableDeclaration",
             "scope": 39,
-            "src": "196:12:0",
+            "src": "843:16:0",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_OZT_00_$502",
-              "typeString": "contract OZT_00"
+              "typeIdentifier": "t_contract$_MyToken_01_$345",
+              "typeString": "contract MyToken_01"
             },
             "typeName": {
               "contractScope": null,
               "id": 6,
-              "name": "OZT_00",
+              "name": "MyToken_01",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 502,
-              "src": "196:6:0",
+              "referencedDeclaration": 345,
+              "src": "843:10:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_OZT_00_$502",
-                "typeString": "contract OZT_00"
+                "typeIdentifier": "t_contract$_MyToken_01_$345",
+                "typeString": "contract MyToken_01"
               }
             },
             "value": null,
@@ -427,7 +427,7 @@
             "body": {
               "id": 16,
               "nodeType": "Block",
-              "src": "296:36:0",
+              "src": "951:36:0",
               "statements": [
                 {
                   "expression": {
@@ -444,10 +444,10 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 7,
-                      "src": "307:5:0",
+                      "src": "962:5:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_OZT_00_$502",
-                        "typeString": "contract OZT_00"
+                        "typeIdentifier": "t_contract$_MyToken_01_$345",
+                        "typeString": "contract MyToken_01"
                       }
                     },
                     "nodeType": "Assignment",
@@ -459,21 +459,21 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 9,
-                      "src": "315:6:0",
+                      "src": "970:6:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_OZT_00_$502",
-                        "typeString": "contract OZT_00"
+                        "typeIdentifier": "t_contract$_MyToken_01_$345",
+                        "typeString": "contract MyToken_01"
                       }
                     },
-                    "src": "307:14:0",
+                    "src": "962:14:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_OZT_00_$502",
-                      "typeString": "contract OZT_00"
+                      "typeIdentifier": "t_contract$_MyToken_01_$345",
+                      "typeString": "contract MyToken_01"
                     }
                   },
                   "id": 15,
                   "nodeType": "ExpressionStatement",
-                  "src": "307:14:0"
+                  "src": "962:14:0"
                 }
               ]
             },
@@ -495,40 +495,40 @@
                   "name": "_token",
                   "nodeType": "VariableDeclaration",
                   "scope": 17,
-                  "src": "249:13:0",
+                  "src": "900:17:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_OZT_00_$502",
-                    "typeString": "contract OZT_00"
+                    "typeIdentifier": "t_contract$_MyToken_01_$345",
+                    "typeString": "contract MyToken_01"
                   },
                   "typeName": {
                     "contractScope": null,
                     "id": 8,
-                    "name": "OZT_00",
+                    "name": "MyToken_01",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 502,
-                    "src": "249:6:0",
+                    "referencedDeclaration": 345,
+                    "src": "900:10:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_OZT_00_$502",
-                      "typeString": "contract OZT_00"
+                      "typeIdentifier": "t_contract$_MyToken_01_$345",
+                      "typeString": "contract MyToken_01"
                     }
                   },
                   "value": null,
                   "visibility": "internal"
                 }
               ],
-              "src": "235:37:0"
+              "src": "886:41:0"
             },
             "payable": false,
             "returnParameters": {
               "id": 11,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "296:0:0"
+              "src": "951:0:0"
             },
             "scope": 39,
-            "src": "215:117:0",
+            "src": "866:121:0",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
@@ -537,7 +537,7 @@
             "body": {
               "id": 37,
               "nodeType": "Block",
-              "src": "368:108:0",
+              "src": "1119:108:0",
               "statements": [
                 {
                   "expression": {
@@ -551,8 +551,8 @@
                         "name": "super",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2182,
-                        "src": "378:5:0",
+                        "referencedDeclaration": 2023,
+                        "src": "1129:5:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_super$_BurnableCrowdsale_$39",
                           "typeString": "contract super BurnableCrowdsale"
@@ -565,8 +565,8 @@
                       "lValueRequested": false,
                       "memberName": "claimRefund",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 838,
-                      "src": "378:17:0",
+                      "referencedDeclaration": 679,
+                      "src": "1129:17:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                         "typeString": "function ()"
@@ -580,7 +580,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "378:19:0",
+                    "src": "1129:19:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
@@ -588,7 +588,7 @@
                   },
                   "id": 24,
                   "nodeType": "ExpressionStatement",
-                  "src": "378:19:0"
+                  "src": "1129:19:0"
                 },
                 {
                   "expression": {
@@ -605,8 +605,8 @@
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 2134,
-                              "src": "445:3:0",
+                              "referencedDeclaration": 1975,
+                              "src": "1196:3:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
                                 "typeString": "msg"
@@ -620,7 +620,7 @@
                             "memberName": "sender",
                             "nodeType": "MemberAccess",
                             "referencedDeclaration": null,
-                            "src": "445:10:0",
+                            "src": "1196:10:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
                               "typeString": "address"
@@ -641,10 +641,10 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 7,
-                            "src": "429:5:0",
+                            "src": "1180:5:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_OZT_00_$502",
-                              "typeString": "contract OZT_00"
+                              "typeIdentifier": "t_contract$_MyToken_01_$345",
+                              "typeString": "contract MyToken_01"
                             }
                           },
                           "id": 29,
@@ -654,8 +654,8 @@
                           "lValueRequested": false,
                           "memberName": "balanceOf",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 1557,
-                          "src": "429:15:0",
+                          "referencedDeclaration": 1398,
+                          "src": "1180:15:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
                             "typeString": "function (address) view external returns (uint256)"
@@ -669,7 +669,7 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "429:27:0",
+                        "src": "1180:27:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -683,8 +683,8 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2134,
-                          "src": "458:3:0",
+                          "referencedDeclaration": 1975,
+                          "src": "1209:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
@@ -698,7 +698,7 @@
                         "memberName": "sender",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": null,
-                        "src": "458:10:0",
+                        "src": "1209:10:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -723,10 +723,10 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 7,
-                        "src": "407:5:0",
+                        "src": "1158:5:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_OZT_00_$502",
-                          "typeString": "contract OZT_00"
+                          "typeIdentifier": "t_contract$_MyToken_01_$345",
+                          "typeString": "contract MyToken_01"
                         }
                       },
                       "id": 27,
@@ -736,8 +736,8 @@
                       "lValueRequested": false,
                       "memberName": "burnByCrowdsale",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 501,
-                      "src": "407:21:0",
+                      "referencedDeclaration": 344,
+                      "src": "1158:21:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$returns$__$",
                         "typeString": "function (uint256,address) external"
@@ -751,7 +751,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "407:62:0",
+                    "src": "1158:62:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
@@ -759,11 +759,11 @@
                   },
                   "id": 36,
                   "nodeType": "ExpressionStatement",
-                  "src": "407:62:0"
+                  "src": "1158:62:0"
                 }
               ]
             },
-            "documentation": null,
+            "documentation": "@dev This function will execute the claimRefund in\nit's functions",
             "id": 38,
             "implemented": true,
             "isConstructor": false,
@@ -775,27 +775,27 @@
               "id": 18,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "358:2:0"
+              "src": "1109:2:0"
             },
             "payable": false,
             "returnParameters": {
               "id": 19,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "368:0:0"
+              "src": "1119:0:0"
             },
             "scope": 39,
-            "src": "338:138:0",
+            "src": "1089:138:0",
             "stateMutability": "nonpayable",
-            "superFunction": 838,
+            "superFunction": 679,
             "visibility": "public"
           }
         ],
         "scope": 40,
-        "src": "139:339:0"
+        "src": "665:564:0"
       }
     ],
-    "src": "0:479:0"
+    "src": "0:1230:0"
   },
   "legacyAST": {
     "absolutePath": "/Users/ahmedalmutawa/ethereum/EventCrowd/contracts/BurnableCrowdsale.sol",
@@ -819,13 +819,13 @@
         "src": "0:24:0"
       },
       {
-        "absolutePath": "/Users/ahmedalmutawa/ethereum/EventCrowd/contracts/OZT_00.sol",
-        "file": "./OZT_00.sol",
+        "absolutePath": "/Users/ahmedalmutawa/ethereum/EventCrowd/contracts/MyToken_01.sol",
+        "file": "./MyToken_01.sol",
         "id": 2,
         "nodeType": "ImportDirective",
         "scope": 40,
-        "sourceUnit": 503,
-        "src": "26:22:0",
+        "sourceUnit": 346,
+        "src": "26:26:0",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -835,8 +835,8 @@
         "id": 3,
         "nodeType": "ImportDirective",
         "scope": 40,
-        "sourceUnit": 895,
-        "src": "49:88:0",
+        "sourceUnit": 736,
+        "src": "53:88:0",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -849,36 +849,36 @@
               "id": 4,
               "name": "RefundableCrowdsale",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 894,
-              "src": "169:19:0",
+              "referencedDeclaration": 735,
+              "src": "695:19:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_RefundableCrowdsale_$894",
+                "typeIdentifier": "t_contract$_RefundableCrowdsale_$735",
                 "typeString": "contract RefundableCrowdsale"
               }
             },
             "id": 5,
             "nodeType": "InheritanceSpecifier",
-            "src": "169:19:0"
+            "src": "695:19:0"
           }
         ],
         "contractDependencies": [
-          732,
-          780,
-          894,
-          1006,
-          1186
+          573,
+          621,
+          735,
+          847,
+          1027
         ],
         "contractKind": "contract",
-        "documentation": null,
+        "documentation": "@title Burnable Crowdsale Contract\n * @dev Implementation of a Burnable Crowdsale\nthis contract is meant to be implemented on top of a Refundable Crowdsale\nin order to burn Tokens when the user send the tokens back to the contract\n * The Tokens will be burned when the user execute \"claimRenund\" funtion (located in Refundable Crowdsale contract).\n * This contract for some reason is not available in OpenZeppelin library.\nso I've made one and will be happy to replace it when they have one.",
         "fullyImplemented": false,
         "id": 39,
         "linearizedBaseContracts": [
           39,
-          894,
-          780,
-          1186,
-          1006,
-          732
+          735,
+          621,
+          1027,
+          847,
+          573
         ],
         "name": "BurnableCrowdsale",
         "nodeType": "ContractDefinition",
@@ -889,23 +889,23 @@
             "name": "token",
             "nodeType": "VariableDeclaration",
             "scope": 39,
-            "src": "196:12:0",
+            "src": "843:16:0",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_OZT_00_$502",
-              "typeString": "contract OZT_00"
+              "typeIdentifier": "t_contract$_MyToken_01_$345",
+              "typeString": "contract MyToken_01"
             },
             "typeName": {
               "contractScope": null,
               "id": 6,
-              "name": "OZT_00",
+              "name": "MyToken_01",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 502,
-              "src": "196:6:0",
+              "referencedDeclaration": 345,
+              "src": "843:10:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_OZT_00_$502",
-                "typeString": "contract OZT_00"
+                "typeIdentifier": "t_contract$_MyToken_01_$345",
+                "typeString": "contract MyToken_01"
               }
             },
             "value": null,
@@ -915,7 +915,7 @@
             "body": {
               "id": 16,
               "nodeType": "Block",
-              "src": "296:36:0",
+              "src": "951:36:0",
               "statements": [
                 {
                   "expression": {
@@ -932,10 +932,10 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 7,
-                      "src": "307:5:0",
+                      "src": "962:5:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_OZT_00_$502",
-                        "typeString": "contract OZT_00"
+                        "typeIdentifier": "t_contract$_MyToken_01_$345",
+                        "typeString": "contract MyToken_01"
                       }
                     },
                     "nodeType": "Assignment",
@@ -947,21 +947,21 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 9,
-                      "src": "315:6:0",
+                      "src": "970:6:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_OZT_00_$502",
-                        "typeString": "contract OZT_00"
+                        "typeIdentifier": "t_contract$_MyToken_01_$345",
+                        "typeString": "contract MyToken_01"
                       }
                     },
-                    "src": "307:14:0",
+                    "src": "962:14:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_OZT_00_$502",
-                      "typeString": "contract OZT_00"
+                      "typeIdentifier": "t_contract$_MyToken_01_$345",
+                      "typeString": "contract MyToken_01"
                     }
                   },
                   "id": 15,
                   "nodeType": "ExpressionStatement",
-                  "src": "307:14:0"
+                  "src": "962:14:0"
                 }
               ]
             },
@@ -983,40 +983,40 @@
                   "name": "_token",
                   "nodeType": "VariableDeclaration",
                   "scope": 17,
-                  "src": "249:13:0",
+                  "src": "900:17:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_OZT_00_$502",
-                    "typeString": "contract OZT_00"
+                    "typeIdentifier": "t_contract$_MyToken_01_$345",
+                    "typeString": "contract MyToken_01"
                   },
                   "typeName": {
                     "contractScope": null,
                     "id": 8,
-                    "name": "OZT_00",
+                    "name": "MyToken_01",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 502,
-                    "src": "249:6:0",
+                    "referencedDeclaration": 345,
+                    "src": "900:10:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_OZT_00_$502",
-                      "typeString": "contract OZT_00"
+                      "typeIdentifier": "t_contract$_MyToken_01_$345",
+                      "typeString": "contract MyToken_01"
                     }
                   },
                   "value": null,
                   "visibility": "internal"
                 }
               ],
-              "src": "235:37:0"
+              "src": "886:41:0"
             },
             "payable": false,
             "returnParameters": {
               "id": 11,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "296:0:0"
+              "src": "951:0:0"
             },
             "scope": 39,
-            "src": "215:117:0",
+            "src": "866:121:0",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
@@ -1025,7 +1025,7 @@
             "body": {
               "id": 37,
               "nodeType": "Block",
-              "src": "368:108:0",
+              "src": "1119:108:0",
               "statements": [
                 {
                   "expression": {
@@ -1039,8 +1039,8 @@
                         "name": "super",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 2182,
-                        "src": "378:5:0",
+                        "referencedDeclaration": 2023,
+                        "src": "1129:5:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_super$_BurnableCrowdsale_$39",
                           "typeString": "contract super BurnableCrowdsale"
@@ -1053,8 +1053,8 @@
                       "lValueRequested": false,
                       "memberName": "claimRefund",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 838,
-                      "src": "378:17:0",
+                      "referencedDeclaration": 679,
+                      "src": "1129:17:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$__$returns$__$",
                         "typeString": "function ()"
@@ -1068,7 +1068,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "378:19:0",
+                    "src": "1129:19:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
@@ -1076,7 +1076,7 @@
                   },
                   "id": 24,
                   "nodeType": "ExpressionStatement",
-                  "src": "378:19:0"
+                  "src": "1129:19:0"
                 },
                 {
                   "expression": {
@@ -1093,8 +1093,8 @@
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 2134,
-                              "src": "445:3:0",
+                              "referencedDeclaration": 1975,
+                              "src": "1196:3:0",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
                                 "typeString": "msg"
@@ -1108,7 +1108,7 @@
                             "memberName": "sender",
                             "nodeType": "MemberAccess",
                             "referencedDeclaration": null,
-                            "src": "445:10:0",
+                            "src": "1196:10:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
                               "typeString": "address"
@@ -1129,10 +1129,10 @@
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
                             "referencedDeclaration": 7,
-                            "src": "429:5:0",
+                            "src": "1180:5:0",
                             "typeDescriptions": {
-                              "typeIdentifier": "t_contract$_OZT_00_$502",
-                              "typeString": "contract OZT_00"
+                              "typeIdentifier": "t_contract$_MyToken_01_$345",
+                              "typeString": "contract MyToken_01"
                             }
                           },
                           "id": 29,
@@ -1142,8 +1142,8 @@
                           "lValueRequested": false,
                           "memberName": "balanceOf",
                           "nodeType": "MemberAccess",
-                          "referencedDeclaration": 1557,
-                          "src": "429:15:0",
+                          "referencedDeclaration": 1398,
+                          "src": "1180:15:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_external_view$_t_address_$returns$_t_uint256_$",
                             "typeString": "function (address) view external returns (uint256)"
@@ -1157,7 +1157,7 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "429:27:0",
+                        "src": "1180:27:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1171,8 +1171,8 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 2134,
-                          "src": "458:3:0",
+                          "referencedDeclaration": 1975,
+                          "src": "1209:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
@@ -1186,7 +1186,7 @@
                         "memberName": "sender",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": null,
-                        "src": "458:10:0",
+                        "src": "1209:10:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -1211,10 +1211,10 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 7,
-                        "src": "407:5:0",
+                        "src": "1158:5:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_OZT_00_$502",
-                          "typeString": "contract OZT_00"
+                          "typeIdentifier": "t_contract$_MyToken_01_$345",
+                          "typeString": "contract MyToken_01"
                         }
                       },
                       "id": 27,
@@ -1224,8 +1224,8 @@
                       "lValueRequested": false,
                       "memberName": "burnByCrowdsale",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 501,
-                      "src": "407:21:0",
+                      "referencedDeclaration": 344,
+                      "src": "1158:21:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$_t_address_$returns$__$",
                         "typeString": "function (uint256,address) external"
@@ -1239,7 +1239,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "407:62:0",
+                    "src": "1158:62:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
@@ -1247,11 +1247,11 @@
                   },
                   "id": 36,
                   "nodeType": "ExpressionStatement",
-                  "src": "407:62:0"
+                  "src": "1158:62:0"
                 }
               ]
             },
-            "documentation": null,
+            "documentation": "@dev This function will execute the claimRefund in\nit's functions",
             "id": 38,
             "implemented": true,
             "isConstructor": false,
@@ -1263,27 +1263,27 @@
               "id": 18,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "358:2:0"
+              "src": "1109:2:0"
             },
             "payable": false,
             "returnParameters": {
               "id": 19,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "368:0:0"
+              "src": "1119:0:0"
             },
             "scope": 39,
-            "src": "338:138:0",
+            "src": "1089:138:0",
             "stateMutability": "nonpayable",
-            "superFunction": 838,
+            "superFunction": 679,
             "visibility": "public"
           }
         ],
         "scope": 40,
-        "src": "139:339:0"
+        "src": "665:564:0"
       }
     ],
-    "src": "0:479:0"
+    "src": "0:1230:0"
   },
   "compiler": {
     "name": "solc",
@@ -1291,5 +1291,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.0",
-  "updatedAt": "2018-08-11T18:59:16.058Z"
+  "updatedAt": "2018-08-14T18:14:12.822Z"
 }
