@@ -1,145 +1,57 @@
-const RefundableGCC = artifacts.require("./RefundableGCC.sol");
-const GustavoCoin = artifacts.require("./GustavoCoin.sol");
+const MyCrowdsale = artifacts.require("./MyCrowdsale.sol");
+const Token = artifacts.require("./MyToken_01.sol");
 
-/*
-contract('Testing Refundable Crowdsale', function(accounts) {
-  it("Change the ownership of the Token from you to the Crowdsale contract", function() {
-    var refundableGCCInstance;
-
-    return RefundableGCC.deployed().then(function(instance) {
-      refundableGCCInstance = instance;
-      return RefundableGCC.deployed().then(function(instance1) {
-        gustavoCoinInstance = instance1;
-        gustavoCoinInstance.transferOwnership(refundableGCCInstance.address, {from: accounts[0]});
-    }).then(function() {
-        return gustavoCoinInstance.owner.call();
-    }).then(function(address) {
-        assert.equal(address, refundableGCCInstance.address, "the addresses are not the same");
-    });
-  });
-});
-**/
-
-/*
-contract('Testing Refundable Crowdsale', function(accounts) {
-  it("Change the ownership of the Token from you to the Crowdsale contract", function() {
-    var refundableGCCInstance;
-    var gustavoCoinInstance;
-    var gustavoCoinInstance_owner;
-
-    return RefundableGCC.deployed().then(function(instance) {
-      refundableGCCInstance = instance;
-      return RefundableGCC.deployed().then(function(instance1) {
-        gustavoCoinInstance = instance1;
-        gustavoCoinInstance.transferOwnership(refundableGCCInstance.address, {from: accounts[0]});
-    }).then(function() {
-        return gustavoCoinInstance.owner.call();
-    }).then(function(address) {
-        gustavoCoinInstance_owner = address;
-    }).then(function() {
-        ;//refundableGCCInstance.buyTokens(accounts[0],{value: 1000000000000000000});
-    }).then(function() {
-        return gustavoCoinInstance.owner.call();
-    }).then(function(address1) {
-        assert.equal(address1, refundableGCCInstance.address, "the addresses are not the same");
-        //assert.equal(tokenBalance, 5, "it doesn't work");
-    });
-  });
-});
-**/
-
-
-contract('Testing Refundable Crowdsale contract', async (accounts) => {
+contract('Testing MyCrowdsale_01 contract', async (accounts) => {
 
   it("Token contract deployed successfully and owned by the Owner (you)", async () => {
      let owner = accounts[0];
-     let gustavoCoinInstance   = await GustavoCoin.deployed();
-     let gustavoCoinInstance_owner = await gustavoCoinInstance.owner.call();
-     assert.equal(gustavoCoinInstance_owner, owner);
+     let tokenInstance   = await Token.deployed();
+     let tokenInstance_owner = await tokenInstance.owner.call();
+     assert.equal(tokenInstance_owner, owner);
   })
 
   it("Crowdsale contract deployed successfully and owned by the Owner (you)", async () => {
      let owner = accounts[0];
-     let refundableGCCInstance = await RefundableGCC.deployed();
-     let refundableGCCInstance_owner = await refundableGCCInstance.owner_.call();
-     assert.equal(refundableGCCInstance_owner, owner);
+     let myCrowdsaleInstance = await MyCrowdsale.deployed();
+     let myCrowdsaleInstance_owner = await myCrowdsaleInstance.owner_.call();
+     assert.equal(myCrowdsaleInstance_owner, owner);
   })
 
   it("Change the ownership of the Token contract from the Owner (you) to the Crowdsale contract", async () => {
-     let refundableGCCInstance = await RefundableGCC.deployed();
-     let gustavoCoinInstance   = await GustavoCoin.deployed();
-     await gustavoCoinInstance.transferOwnership(refundableGCCInstance.address, {from: accounts[0]});
-     let gustavoCoinInstance_owner = await gustavoCoinInstance.owner.call();
-     assert.equal(gustavoCoinInstance_owner, refundableGCCInstance.address);
+     let myCrowdsaleInstance = await MyCrowdsale.deployed();
+     let tokenInstance   = await Token.deployed();
+     await tokenInstance.transferOwnership(myCrowdsaleInstance.address, {from: accounts[0]});
+     let tokenInstance_owner = await tokenInstance.owner.call();
+     assert.equal(tokenInstance_owner, myCrowdsaleInstance.address);
   })
 
   it("Make sure no Tokens have been minted yet (zero balance)", async () => {
-     //let refundableGCCInstance = await RefundableGCC.deployed();
-     let gustavoCoinInstance   = await GustavoCoin.deployed();
-     let totalSupply = await gustavoCoinInstance.totalSupply();
+     let tokenInstance   = await Token.deployed();
+     let totalSupply = await tokenInstance.totalSupply();
      assert.equal(totalSupply, 0);
   })
 
+  /**
+  * @dev we need to override the contract timing when conducting tests through truffle.
+  * the reason is: truffle execute the tests without waiting until the contract gets started.
+  */
+  it("Modify contract timings: to start now and end after few seconds (needed for truffle testing)", async () => {
+     let myCrowdsaleInstance = await MyCrowdsale.deployed();
+     let tokenInstance   = await Token.deployed();
+     await myCrowdsaleInstance.setTime(0,100);
+     let x = await myCrowdsaleInstance.timeToCloseContract();
+     let time = x.toNumber();
+     assert.isAbove(time, 50, "time is set");
+  })
 
-/*
-  it("Buy 1 tickets (tokens) from the Crowdsale contract", async () => {
-     let refundableGCCInstance = await RefundableGCC.deployed();
-     let gustavoCoinInstance   = await GustavoCoin.deployed();
-     await refundableGCCInstance.buyTokens(accounts[0],{from: accounts[0], value: 1000000000000000000});//account_two, {from: account_two, value: 1000000000000000000}
-     let x = await gustavoCoinInstance.balanceOf.call(accounts[0]);
+  it("Buy 1 ticket (token) from the Crowdsale contract", async () => {
+     let myCrowdsaleInstance = await MyCrowdsale.deployed();
+     let tokenInstance   = await Token.deployed();
+     await myCrowdsaleInstance.buyTokens(accounts[0],{from: accounts[0], value: web3.toWei(0.01, 'ether')});//account_two, {from: account_two, value: 1000000000000000000} web3.toWei(1, 'ether')
+     let x = await tokenInstance.balanceOf.call(accounts[0]);
      let tokenBalance = x.toNumber();
-     assert.equal(tokenBalance, 5, "the balances are not equal");
+     let answer = web3.toWei(0.01, 'ether') * 100 ; // multiplied by 100 since every 0.01 eth is equal to 1 ticket.
+     assert.equal(tokenBalance, answer, "the balances are not equal");
   })
 
-  it("click finalize contract", async () => {
-     let refundableGCCInstance = await RefundableGCC.deployed();
-     let gustavoCoinInstance   = await GustavoCoin.deployed();
-     await refundableGCCInstance.finalize();
-     let gustavoCoinInstance_owner = await gustavoCoinInstance.owner.call();
-     assert.equal(gustavoCoinInstance_owner, refundableGCCInstance.address);
-  })
-
-
-
-
-/*
-  it("should call a function that depends on a linked library", async () => {
-    let meta = await MetaCoin.deployed();
-    let outCoinBalance = await meta.getBalance.call(accounts[0]);
-    let metaCoinBalance = outCoinBalance.toNumber();
-    let outCoinBalanceEth = await meta.getBalanceInEth.call(accounts[0]);
-    let metaCoinEthBalance = outCoinBalanceEth.toNumber();
-    assert.equal(metaCoinEthBalance, 2 * metaCoinBalance);
-
-  });
-
-  it("should send coin correctly", async () => {
-
-    // Get initial balances of first and second account.
-    let account_one = accounts[0];
-    let account_two = accounts[1];
-
-    let amount = 10;
-
-
-    let instance = await MetaCoin.deployed();
-    let meta = instance;
-
-    let balance = await meta.getBalance.call(account_one);
-    let account_one_starting_balance = balance.toNumber();
-
-    balance = await meta.getBalance.call(account_two);
-    let account_two_starting_balance = balance.toNumber();
-    await meta.sendCoin(account_two, amount, {from: account_one});
-
-    balance = await meta.getBalance.call(account_one);
-    let account_one_ending_balance = balance.toNumber();
-
-    balance = await meta.getBalance.call(account_two);
-    let account_two_ending_balance = balance.toNumber();
-
-    assert.equal(account_one_ending_balance, account_one_starting_balance - amount, "Amount wasn't correctly taken from the sender");
-    assert.equal(account_two_ending_balance, account_two_starting_balance + amount, "Amount wasn't correctly sent to the receiver");
-  });
-**/
 })
